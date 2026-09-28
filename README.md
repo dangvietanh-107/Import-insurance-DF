@@ -28,7 +28,7 @@ Các thông báo dưới đây là những trường hợp ứng dụng hiện b
 | E007 | Sheet không có dòng header hoặc file rỗng | Hiển thị như E006, với danh sách các cột bắt buộc bị thiếu | Không tạo Output. |
 | E008 | SheetJS không đọc được file, file hỏng, hoặc định dạng không được thư viện hỗ trợ | Hiển thị thông báo lỗi do thư viện trả về; nếu không có nội dung lỗi thì hiển thị `Không thể xử lý file.` | Không tạo Output. |
 
-Danh sách cột bắt buộc hiện tại là: `MA_THUOC`, `TEN_THUOC`, `TEN_HOAT_CHAT`, `DON_VI_TINH`, `HAM_LUONG`, `DUONG_DUNG`, `MA_DUONG_DUNG`, `SO_DANG_KY`, `DON_GIA`, `DON_GIA_BH`, `QUY_CACH`, `NHA_SX`, `NUOC_SX`, `NHA_THAU`, `TT_THAU`, `MA_CSKCB`.
+Danh sách cột bắt buộc hiện tại là: `MA_THUOC`, `MA_HOAT_CHAT_AX`, `TEN_THUOC`, `TEN_HOAT_CHAT`, `DON_VI_TINH`, `HAM_LUONG`, `DUONG_DUNG`, `MA_DUONG_DUNG`, `SO_DANG_KY`, `DON_GIA`, `DON_GIA_BH`, `QUY_CACH`, `NHA_SX`, `NUOC_SX`, `NHA_THAU`, `TT_THAU`, `MA_CSKCB`.
 
 Tên header được trim, bỏ dấu, thay ký tự phân cách bằng `_`, rồi chuẩn hóa thành chữ hoa trước khi kiểm tra. Vì vậy các biến thể như `MA THUOC`, ` MA_THUOC ` và `Mã thuốc` có thể được nhận diện là `MA_THUOC`. Dữ liệu trong ô không bị thay đổi theo bước chuẩn hóa header.
 
