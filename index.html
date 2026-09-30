@@ -1,1 +1,40 @@
-<!doctype html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Chuyển đổi dữ liệu thuốc BHYT</title><link rel="stylesheet" href="style.css"></head><body><main class="card" aria-busy="false"><h1>Tool chuyển đổi dữ liệu thuốc BHYT</h1><p class="intro">Chọn file Excel hoặc CSV; dữ liệu chỉ được xử lý trên máy của bạn.</p><label class="file-label" for="inputFile">File Input (.xlsx, .xls, .csv)</label><input id="inputFile" type="file" accept=".xlsx,.xls,.csv"><div class="file-info"><span id="fileState" class="file-state idle">Chưa chọn file</span><span id="fileName" class="muted">Chưa chọn file.</span></div><div class="mapping-inputs"><label for="startingMavattu">MAVATTU bắt đầu</label><input id="startingMavattu" type="number" step="1" inputmode="numeric" required><label for="manhomvattu">MANHOMVATTU</label><input id="manhomvattu" type="number" step="1" inputmode="numeric" required></div><div class="actions"><button id="processButton" type="button">XỬ LÝ</button><button id="resetButton" class="secondary" type="button">RESET</button></div><section class="status-panel" aria-live="polite"><h2>Trạng thái</h2><p id="status">Đang chờ file...</p></section><section id="result" class="result" hidden><h2>Kết quả</h2><p>Tổng dòng Input: <strong id="inputCount">0</strong></p><p>Đã xử lý: <strong id="outputCount">0</strong></p><p>Lỗi/cảnh báo: <strong id="errorCount">0</strong></p><button id="downloadButton" type="button" disabled>TẢI FILE OUTPUT</button><details id="warningsBox" hidden><summary>Chi tiết lỗi/cảnh báo</summary><ul id="warnings"></ul></details></section></main><script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script><script type="module" src="js/app.js"></script></body></html>
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Chuyển đổi dữ liệu thuốc</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="card" aria-busy="false">
+      <h1>Tool chuyển đổi dữ liệu thuốc</h1>
+      <p class="intro">Chọn chức năng cần sử dụng. Dữ liệu chỉ được xử lý trên máy của bạn.</p>
+      <div class="tabs" role="tablist" aria-label="Chức năng chuyển đổi">
+        <button id="bhytTab" class="tab active" type="button" role="tab" aria-selected="true" aria-controls="bhytPanel">Thuốc HIS L3</button>
+        <button id="his4Tab" class="tab" type="button" role="tab" aria-selected="false" aria-controls="his4Panel">Thuốc HIS4.0</button>
+      </div>
+      <section id="bhytPanel" class="tool-panel" role="tabpanel" aria-labelledby="bhytTab">
+        <p class="intro">Chọn file Excel hoặc CSV cho danh mục thuốc HIS L3.</p>
+        <label class="file-label" for="inputFile">File Input HIS L3 (.xlsx, .xls, .csv)</label>
+        <input id="inputFile" type="file" accept=".xlsx,.xls,.csv" />
+        <div class="file-info"><span id="fileState" class="file-state idle">Chưa chọn file</span><span id="fileName" class="muted">Chưa chọn file.</span></div>
+        <div class="mapping-inputs"><label for="startingMavattu">MAVATTU bắt đầu</label><input id="startingMavattu" type="number" step="1" inputmode="numeric" required /><label for="manhomvattu">MANHOMVATTU</label><input id="manhomvattu" type="number" step="1" inputmode="numeric" required /></div>
+        <div class="actions"><button id="processButton" type="button">XỬ LÝ HIS L3</button><button id="resetButton" class="secondary" type="button">RESET</button></div>
+        <section class="status-panel" aria-live="polite"><h2>Trạng thái HIS L3</h2><p id="status">Đang chờ file...</p></section>
+        <section id="result" class="result" hidden><h2>Kết quả HIS L3</h2><p>Tổng dòng Input: <strong id="inputCount">0</strong></p><p>Đã xử lý: <strong id="outputCount">0</strong></p><p>Lỗi/cảnh báo: <strong id="errorCount">0</strong></p><button id="downloadButton" type="button" disabled>TẢI FILE OUTPUT</button><details id="warningsBox" hidden><summary>Chi tiết lỗi/cảnh báo</summary><ul id="warnings"></ul></details></section>
+      </section>
+      <section id="his4Panel" class="tool-panel" role="tabpanel" aria-labelledby="his4Tab" hidden>
+        <p class="intro">Chọn file Excel hoặc CSV để chuyển đổi theo cấu trúc Thuốc HIS4.0.</p>
+        <label class="file-label" for="his4InputFile">File Input HIS4.0 (.xlsx, .xls, .csv)</label>
+        <input id="his4InputFile" type="file" accept=".xlsx,.xls,.csv" />
+        <div class="file-info"><span id="his4FileState" class="file-state idle">Chưa chọn file</span><span id="his4FileName" class="muted">Chưa chọn file.</span></div>
+        <div class="actions"><button id="his4ProcessButton" type="button">XỬ LÝ HIS4.0</button><button id="his4ResetButton" class="secondary" type="button">RESET</button></div>
+        <section class="status-panel" aria-live="polite"><h2>Trạng thái HIS4.0</h2><p id="his4Status">Đang chờ file...</p></section>
+        <section id="his4Result" class="result" hidden><h2>Kết quả HIS4.0</h2><p>Tổng dòng Input: <strong id="his4InputCount">0</strong></p><p>Đã xử lý: <strong id="his4OutputCount">0</strong></p><p>Lỗi/cảnh báo: <strong id="his4ErrorCount">0</strong></p><button id="his4DownloadButton" type="button" disabled>TẢI FILE OUTPUT HIS4.0</button><details id="his4WarningsBox" hidden><summary>Chi tiết lỗi/cảnh báo</summary><ul id="his4Warnings"></ul></details></section>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
