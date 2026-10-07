@@ -15,10 +15,8 @@ export function mapHis4Row(raw, index) {
   const tender = parseTender(input.TT_THAU);
   const warnings = [];
   let baseCode = '';
+  output.THAUGHEP = input.TT_THAU ?? '';
   if (tender.valid) {
-    output.THAUGHEP = tender.decision;
-    output.SO_GOI_THAU = tender.packageCode;
-    output.STT_THAU = tender.groupCode;
     baseCode = tender.reportCode;
   } else {
     warnings.push('TT_THAU không đúng định dạng SỐ_QUYẾT_ĐỊNH;MÃ_GÓI_THAU;MÃ_NHÓM_THAU;NĂM (NĂM gồm 4 chữ số).');

@@ -133,12 +133,14 @@ Các trường sau được gán giá trị mặc định:
 | --------------------------------- | ---------------- |
 | `NHOM_BHXH`                       | `10`             |
 | `BHYT_CHI_TRA`                    | `100`            |
+| `LOAI_THUOC`                      | `1`              |
 | Các trường chưa có quy tắc ánh xạ | Chuỗi rỗng `""`  |
 
 Lưu ý:
 
 * Giá trị mặc định `10` của `NHOM_BHXH` được lấy theo ví dụ Output do người dùng cung cấp.
 * Giá trị mặc định `100` của `BHYT_CHI_TRA` được lấy theo ví dụ Output do người dùng cung cấp.
+* `LOAI_THUOC` luôn nhận giá trị mặc định `1`, không lấy dữ liệu từ Input.
 * Không tự động gán các giá trị mặc định khác nếu chưa có yêu cầu.
 
 ---
@@ -163,11 +165,7 @@ Lưu ý:
 | `NHA_SX`           | `HANG_SX`            | Sao chép trực tiếp |
 | `NUOC_SX`          | `NUOC_SX`            | Sao chép trực tiếp |
 | `NHA_THAU`         | `NHA_CUNG_CAP`       | Sao chép trực tiếp |
-| `SO_LUONG`         | `SO_LUONG`           | Sao chép trực tiếp |
 | `MA_CSKCB`         | `MA_CSKCB`           | Sao chép trực tiếp |
-| `LOAI_THUOC`       | `LOAI_THUOC`         | Sao chép trực tiếp |
-| `LOAI_THAU`        | `LOAI_THAU`          | Sao chép trực tiếp |
-| `HT_THAU`          | `HT_THAU`            | Sao chép trực tiếp |
 | `MA_DVKT`          | `MA_DVKT`            | Sao chép trực tiếp |
 | `TCCL`             | `TIEUCHUANCHATLUONG` | Sao chép trực tiếp |
 | `BO_PHAN_VT`       | `BOPHANSUDUNG`       | Sao chép trực tiếp |
@@ -177,10 +175,6 @@ Lưu ý:
 | `TLHH_CB`          | `TLHH_CB`            | Sao chép trực tiếp |
 | `TLHH_BQ`          | `TLHH_BQ`            | Sao chép trực tiếp |
 | `TU_NGAY`          | `CONG_BO`            | Sao chép trực tiếp |
-| `TU_NGAY`          | `TU_NGAY`            | Sao chép trực tiếp |
-| `DEN_NGAY`         | `DEN_NGAY`           | Sao chép trực tiếp |
-| `TU_NGAY`          | `TUNGAY_HD`          | Sao chép trực tiếp |
-| `DEN_NGAY`         | `DENNGAY_HD`         | Sao chép trực tiếp |
 
 ### 6.2. Mapping giá
 
@@ -205,7 +199,6 @@ Các trường sau để trống nếu không có quy tắc bổ sung:
 * `STT_THAU`
 * `NGUONCT`
 * `SOGIAYPHEP`
-* `THAUGHEP`
 * `MA_PP_CHEBIEN` nếu không có `MA_DL_CB`
 * `MAHIEUSP`
 * `TINHTRANGDUOCLIEU`
@@ -232,6 +225,13 @@ Các trường sau để trống nếu không có quy tắc bổ sung:
 * `THUOCCORTICOID`
 * `VAT nhập (%)`
 * `VAT xuất (%)`
+* `TU_NGAY`
+* `DEN_NGAY`
+* `TUNGAY_HD`
+* `DENNGAY_HD`
+* `SO_LUONG`
+* `LOAI_THAU`
+* `HT_THAU`
 
 ---
 
@@ -258,12 +258,10 @@ Tách thành:
 
 | Input                  | Output               | Quy tắc           |
 | ---------------------- | -------------------- | ----------------- |
-| `TT_THAU` thành phần A | `THAUGHEP`           | Lấy số quyết định |
-| `TT_THAU` thành phần B | `SO_GOI_THAU`        | Lấy mã gói thầu   |
-| `TT_THAU` thành phần C | `STT_THAU`           | Lấy mã nhóm thầu  |
+| Toàn bộ `TT_THAU`      | `THAUGHEP`           | Sao chép trực tiếp, không tách |
 | `TT_THAU` thành phần D | Dùng để tạo mã thuốc | Lấy năm           |
 
-Lưu ý: Cách ánh xạ `STT_THAU` từ thành phần C là quy tắc tạm thời theo cấu trúc `TT_THAU`; cần xác nhận nếu trường này mang ý nghĩa khác trong HIS4.0.
+`SO_GOI_THAU` và `STT_THAU` luôn để trống. Thành phần A, B và C chỉ được dùng để kiểm tra định dạng; riêng thành phần A và D vẫn được dùng để tạo mã thuốc.
 
 ---
 
@@ -323,7 +321,7 @@ Quy tắc:
 
 ## 10. Xử lý dữ liệu thiếu hoặc sai định dạng
 
-* Nếu `TT_THAU` thiếu hoặc sai định dạng, các trường cần tách từ `TT_THAU` để trống.
+* Nếu `TT_THAU` thiếu hoặc sai định dạng, `THAUGHEP` vẫn giữ nguyên giá trị Input; `MA_THUOC` và `MA_THUOC_BV` để trống do không tạo được mã thuốc.
 * Nếu không xác định được năm hoặc số quyết định, không tạo mã thuốc từ dữ liệu không hợp lệ.
 * Nếu thiếu trường Input tương ứng, trường Output được ánh xạ sẽ để trống.
 * Không tự động xóa dòng chỉ vì thiếu dữ liệu.
